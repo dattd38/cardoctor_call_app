@@ -64,7 +64,7 @@ class _MyAppState extends State<MyApp> {
             print('refuse');
           },
           avatarImage: const Icon(Icons.ac_unit_outlined),
-          isIncomingCall: true,
+          isIncomingCall: false,
           userName: 'Duc Dat',
           userType: 'Dev test goi',
           isAccept: isAcceptCall,

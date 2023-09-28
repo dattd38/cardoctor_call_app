@@ -154,12 +154,12 @@ class _CallAppState extends State<CallApp> with SingleTickerProviderStateMixin {
                 ),
                 const SizedBox(height: 24),
                 Visibility(visible: widget.isAccept, child: _buildTimer()),
-                Visibility(visible: !widget.isAccept, child: _incomingCall()),
+                Visibility(visible: !widget.isAccept && widget.isIncomingCall, child: _incomingCall()),
               ],
             ),
           ),
         ),
-        bottomNavigationBar: !widget.isAccept
+        bottomNavigationBar: !widget.isAccept && widget.isIncomingCall
             ? Container(
                 height: 120,
                 margin: const EdgeInsets.only(left: 24, right: 24),
