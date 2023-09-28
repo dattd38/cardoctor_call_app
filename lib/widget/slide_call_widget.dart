@@ -1,9 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
-import '../constant.dart';
 
 class SlideCallWidget extends StatefulWidget {
   const SlideCallWidget({
@@ -24,11 +22,7 @@ class SlideCallWidget extends StatefulWidget {
     this.animationDuration = const Duration(milliseconds: 300),
     this.reversed = false,
     this.alignment = Alignment.center,
-    this.onMic,
-    this.onSpeaker,
     this.textStyleIcon,
-    this.onMessage,
-    this.onEndCall,
   });
 
   final double sliderButtonIconSize;
@@ -43,10 +37,6 @@ class SlideCallWidget extends StatefulWidget {
   final TextStyle? textStyle;
   final double borderRadius;
   final VoidCallback? onSubmit;
-  final VoidCallback? onMic;
-  final VoidCallback? onSpeaker;
-  final VoidCallback? onMessage;
-  final VoidCallback? onEndCall;
   final Widget? sliderButtonIcon;
   final Duration animationDuration;
   final bool reversed;

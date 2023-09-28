@@ -54,6 +54,7 @@ class _CallAppState extends State<CallApp> with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
   Duration duration = const Duration();
   Timer? timer;
+
   void addTime() {
     const int addSeconds = 1;
     setState(() {
@@ -152,7 +153,7 @@ class _CallAppState extends State<CallApp> with SingleTickerProviderStateMixin {
                       ),
                 ),
                 const SizedBox(height: 24),
-                Visibility(visible: widget.isAccept, child:  _buildTimer()),
+                Visibility(visible: widget.isAccept, child: _buildTimer()),
                 Visibility(visible: !widget.isAccept, child: _incomingCall()),
               ],
             ),
@@ -163,12 +164,6 @@ class _CallAppState extends State<CallApp> with SingleTickerProviderStateMixin {
                 height: 120,
                 margin: const EdgeInsets.only(left: 24, right: 24),
                 child: SlideCallWidget(
-                  onMic: () {
-                    widget.onMic!();
-                  },
-                  onSpeaker: () {
-                    widget.onSpeaker!();
-                  },
                   height: 80,
                   animationDuration: const Duration(milliseconds: 50),
                   innerColor: Colors.green,
@@ -212,7 +207,7 @@ class _CallAppState extends State<CallApp> with SingleTickerProviderStateMixin {
 
   Widget _acceptCall() {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 24,horizontal: 24),
+      padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 24),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -245,7 +240,9 @@ class _CallAppState extends State<CallApp> with SingleTickerProviderStateMixin {
                       package: packageName,
                       width: 24,
                       height: 24,
-                      color: widget.isOffMic ? const Color(0xFF25B3E8) : Colors.black,
+                      color: widget.isOffMic
+                          ? const Color(0xFF25B3E8)
+                          : Colors.black,
                     )),
               ),
               const SizedBox(height: 8),
@@ -262,7 +259,7 @@ class _CallAppState extends State<CallApp> with SingleTickerProviderStateMixin {
           Expanded(
             child: GestureDetector(
               onTap: () {
-                widget.onEndCall;
+                widget.onEndCall!();
               },
               child: Container(
                 margin: const EdgeInsets.only(bottom: 24),
@@ -314,7 +311,9 @@ class _CallAppState extends State<CallApp> with SingleTickerProviderStateMixin {
                       package: packageName,
                       width: 24,
                       height: 24,
-                      color: widget.isOffSpeaker ? const Color(0xFF25B3E8) : Colors.black,
+                      color: widget.isOffSpeaker
+                          ? const Color(0xFF25B3E8)
+                          : Colors.black,
                     )),
               ),
               const SizedBox(height: 8),
@@ -343,7 +342,7 @@ class _CallAppState extends State<CallApp> with SingleTickerProviderStateMixin {
             children: [
               GestureDetector(
                 onTap: () {
-                  widget.onMessage;
+                  widget.onMessage!();
                 },
                 child: Container(
                     width: 50,
@@ -383,7 +382,7 @@ class _CallAppState extends State<CallApp> with SingleTickerProviderStateMixin {
             children: [
               GestureDetector(
                 onTap: () {
-                  widget.onEndCall;
+                  widget.onEndCall!();
                 },
                 child: Container(
                   width: 50,
@@ -420,5 +419,4 @@ class _CallAppState extends State<CallApp> with SingleTickerProviderStateMixin {
       ),
     );
   }
-
 }
