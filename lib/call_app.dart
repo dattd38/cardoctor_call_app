@@ -173,7 +173,11 @@ class _CallAppState extends State<CallApp> with SingleTickerProviderStateMixin {
                     package: packageName,
                   ),
                   text: '        Trượt để trả lời cuộc gọi',
-                  textStyle: widget.titleStyle?.copyWith(color: Colors.black) ??
+                  textStyle: widget.titleStyle?.copyWith(
+                          color: Colors.grey,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                          height: 22 / 16) ??
                       const TextStyle(
                         color: Colors.black,
                         fontSize: 20,
