@@ -1,4 +1,3 @@
-import 'dart:async';
 
 import 'package:cardoctor_call_app/widget/pulse_widget.dart';
 import 'package:cardoctor_call_app/widget/slide_call_widget.dart';
@@ -11,6 +10,7 @@ class CallApp extends StatefulWidget {
   final bool isIncomingCall;
   final TextStyle? titleStyle;
   final Widget avatarImage;
+  final Widget startTimer;
   final TextStyle? subIconTitleStyle;
   final TextStyle? timeStyle;
   final VoidCallback? onSubmit;
@@ -44,7 +44,7 @@ class CallApp extends StatefulWidget {
       required this.isOffMic,
       required this.isOffSpeaker,
       required this.isAccept,
-      this.onMessage});
+      this.onMessage, required this.startTimer});
 
   @override
   State<CallApp> createState() => _CallAppState();
@@ -52,20 +52,6 @@ class CallApp extends StatefulWidget {
 
 class _CallAppState extends State<CallApp> with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
-  Duration duration = const Duration();
-  Timer? timer;
-
-  void addTime() {
-    const int addSeconds = 1;
-    setState(() {
-      final sencond = duration.inSeconds + addSeconds;
-      duration = Duration(seconds: sencond);
-    });
-  }
-
-  void startTimer() {
-    timer = Timer.periodic(const Duration(seconds: 1), (_) => addTime());
-  }
 
   @override
   void initState() {
@@ -153,7 +139,7 @@ class _CallAppState extends State<CallApp> with SingleTickerProviderStateMixin {
                       ),
                 ),
                 const SizedBox(height: 24),
-                Visibility(visible: widget.isAccept, child: _buildTimer()),
+                Visibility(visible: widget.isAccept, child: widget.startTimer),
                 Visibility(visible: !widget.isAccept && widget.isIncomingCall, child: _incomingCall()),
               ],
             ),
@@ -184,33 +170,29 @@ class _CallAppState extends State<CallApp> with SingleTickerProviderStateMixin {
                       ),
                   onSubmit: () {
                     widget.onSubmit!();
-                    startTimer();
+                    // startTimer();
                   },
                 ))
             : _acceptCall());
   }
 
-  Widget _buildTimer() {
-    if(widget.isAccept){
-      startTimer();
-    }
-    String twoDigits(int n) => n.toString().padLeft(2, '0');
-
-    final hours = twoDigits(duration.inHours);
-
-    final minutes = twoDigits(duration.inMinutes.remainder(60));
-
-    final seconds = twoDigits(duration.inSeconds.remainder(60));
-
-    return Text(
-      '$hours:$minutes:$seconds',
-      style: widget.timeStyle ??
-          const TextStyle(
-            color: Colors.black,
-            fontSize: 32,
-          ),
-    );
-  }
+  // Widget _buildTimer() {
+  //   String twoDigits(int n) => n.toString().padLeft(2, '0');
+  //
+  //   final hours = twoDigits(duration.inHours);
+  //
+  //   final minutes = twoDigits(duration.inMinutes.remainder(60));
+  //
+  //   final seconds = twoDigits(duration.inSeconds.remainder(60));
+  //   return Text(
+  //     '$hours:$minutes:$seconds',
+  //     style: widget.timeStyle ??
+  //         const TextStyle(
+  //           color: Colors.black,
+  //           fontSize: 32,
+  //         ),
+  //   );
+  // }
 
   Widget _acceptCall() {
     return Container(
