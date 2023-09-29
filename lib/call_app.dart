@@ -191,6 +191,9 @@ class _CallAppState extends State<CallApp> with SingleTickerProviderStateMixin {
   }
 
   Widget _buildTimer() {
+    if(widget.isAccept){
+      startTimer();
+    }
     String twoDigits(int n) => n.toString().padLeft(2, '0');
 
     final hours = twoDigits(duration.inHours);
